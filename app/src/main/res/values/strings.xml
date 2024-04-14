@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">mutirecyclerview</string>
+
+    <string name="des">Please, select a card you are willing to do the\n money transfer with or add a new card\nusing the plus button below.</string>
+</resources>
