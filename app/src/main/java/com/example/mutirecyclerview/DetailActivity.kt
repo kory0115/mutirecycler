@@ -21,48 +21,44 @@ class DetailActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        bindView1()
-        bindView2()
-        bindView3()
+        bindView()
     }
 
-    private fun bindView1() {
-        val data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent?.getParcelableExtra(PLUG_IN, AssembleEntity.TopModel::class.java)!!
-        } else {
-            intent?.getParcelableExtra<AssembleEntity.TopModel>(PLUG_IN) as AssembleEntity.TopModel
+    private fun bindView() {
+        if (intent.hasExtra(PLUG_IN)) {
+            val data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent?.getParcelableExtra(PLUG_IN, AssembleEntity.TopModel::class.java)!!
+            } else {
+                intent?.getParcelableExtra<AssembleEntity.TopModel>(PLUG_IN) as AssembleEntity.TopModel
+            }
+
+            binding.nameTextView.text = data.name
+            binding.cardNumberTextView.text = data.cardNumber
+            binding.validityTextView.text = data.validity
+            binding.moneyTextView.text = data.currentMoney
+        } else if(intent.hasExtra(PLUG_IN2)) {
+            val data2 = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent?.getParcelableExtra(PLUG_IN2, AssembleEntity.MiddleModel::class.java)!!
+            } else {
+                intent?.getParcelableExtra<AssembleEntity.MiddleModel>(PLUG_IN2) as AssembleEntity.MiddleModel
+            }
+
+            binding.nameTextView.text = data2.name
+            binding.cardNumberTextView.text = data2.cardNumber
+            binding.validityTextView.text = data2.validity
+            binding.moneyTextView.text = data2.currentMoney
+        } else if(intent.hasExtra(PLUG_IN3)) {
+            val data3 = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent?.getParcelableExtra(PLUG_IN3, AssembleEntity.BottomModel::class.java)!!
+            } else {
+                intent?.getParcelableExtra<AssembleEntity.BottomModel>(PLUG_IN3) as AssembleEntity.BottomModel
+            }
+
+            binding.nameTextView.text = data3.name
+            binding.cardNumberTextView.text = data3.cardNumber
+            binding.validityTextView.text = data3.validity
+            binding.moneyTextView.text = data3.currentMoney
         }
-
-        binding.nameTextView.text = data.name
-        binding.cardNumberTextView.text = data.cardNumber
-        binding.validityTextView.text = data.validity
-        binding.moneyTextView.text = data.currentMoney
-    }
-
-    private fun bindView2() {
-        val data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent?.getParcelableExtra(PLUG_IN2, AssembleEntity.MiddleModel::class.java)!!
-        } else {
-            intent?.getParcelableExtra<AssembleEntity.MiddleModel>(PLUG_IN2) as AssembleEntity.MiddleModel
-        }
-
-        binding.nameTextView.text = data.name
-        binding.cardNumberTextView.text = data.cardNumber
-        binding.validityTextView.text = data.validity
-        binding.moneyTextView.text = data.currentMoney
-    }
-
-    private fun bindView3() {
-        val data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent?.getParcelableExtra(PLUG_IN3, AssembleEntity.BottomModel::class.java)!!
-        } else {
-            intent?.getParcelableExtra<AssembleEntity.BottomModel>(PLUG_IN3) as AssembleEntity.BottomModel
-        }
-
-        binding.nameTextView.text = data.name
-        binding.cardNumberTextView.text = data.cardNumber
-        binding.validityTextView.text = data.validity
-        binding.moneyTextView.text = data.currentMoney
     }
 
     companion object {

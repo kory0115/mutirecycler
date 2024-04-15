@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mutirecyclerview.adapter.MuTiAdapter
 import com.example.mutirecyclerview.databinding.ActivityMainBinding
 import com.example.mutirecyclerview.entity.AssembleEntity
+import java.text.DecimalFormat
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate( layoutInflater ) }
@@ -37,8 +38,34 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = muTiAdapter
 
 
-        itemList.add(AssembleEntity.TopModel(name = "Anderson", cardNumber = "2423  3581  9503  2412", validity = "21/24", currentMoney = "$${String.format("%,f", 3100.3)}"))
-        itemList.add(AssembleEntity.MiddleModel(name = "Andrew", cardNumber = "2423  3581  9503  2412", validity = "21/24", currentMoney = "$${String.format("%,f", 3100.3)}"))
-        itemList.add(AssembleEntity.BottomModel(name = "SMITH", cardNumber = "2423  3581  9503  2412", validity = "21/24", currentMoney = "$${String.format("%,f", 3100.3)}"))
+        val decimal2 = DecimalFormat("#,###.00")
+
+        itemList.add(AssembleEntity.TopModel(name = "Anderson", cardNumber = cardNumberView("2423358195032412"), validity = resultView("2124"), currentMoney = "$${decimal2.format(3100.30)}"))
+        itemList.add(AssembleEntity.MiddleModel(name = "Andrew", cardNumber = cardNumberView("2423358195032412"), validity = resultView("2124"), currentMoney = "$${decimal2.format(3100.30)}"))
+        itemList.add(AssembleEntity.BottomModel(name = "SMITH", cardNumber = cardNumberView("2423358195032412"), validity = resultView("2124"), currentMoney = "$${decimal2.format(3100.30)}"))
+    }
+
+    private fun resultView(s : String) : String{
+        var re : String = ""
+        val result: Array<String> = s.toCharArray().map { it.toString() }.toTypedArray()
+        for(i in result.indices) {
+            re += result[i]
+            if(i == 1) {
+                re += "/"
+            }
+        }
+        return re
+    }
+
+    private fun cardNumberView(s : String) : String {
+        var card : String = ""
+        val result: Array<String> = s.toCharArray().map { it.toString() }.toTypedArray()
+        for(i in result.indices) {
+            card += result[i]
+            if(i == 3 || i == 7 || i == 11 || i == 15) {
+                card += "  "
+            }
+        }
+        return card
     }
 }
