@@ -12,7 +12,7 @@ import com.example.mutirecyclerview.R
 import com.example.mutirecyclerview.entity.AssembleEntity
 
 class MuTiAdapter(
-    private val itemList: ArrayList<AssembleEntity> = ArrayList()
+    private val itemList: List<AssembleEntity>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     /*interface ItemClick {
